@@ -95,6 +95,15 @@ rm(list = c("players_df", "players_df_2", "players_df_3"))
 saveRDS(all_train_df, 'data/all_train_df.rds')
 saveRDS(inference_df, 'data/inference_df.rds')
 
+nodes <- all_train_df %>%
+  mutate(from = row_number())
+
+edges <- nodes %>%
+  select(season, club, from) %>%
+  inner_join(select(., season, club, to=from)) %>%
+  select(from, to) %>%
+  as.matrix
+
 # ---- EDA ----
 # TODO
 
