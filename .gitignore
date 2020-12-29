@@ -4,3 +4,4 @@
 .Ruserdata
 models/*
 !models/.gitkeep
+lib/
