@@ -14,6 +14,7 @@ library(viridis)
 library(htmlwidgets)
 
 # Load data
+# Use R/load_data.R to create these datasets
 all_train_df <- readRDS('data/all_train_df.rds')
 inference_df <- readRDS('data/inference_df.rds')
 
@@ -45,11 +46,7 @@ preds <- predict(tune_res, newdata = select(test, names(train)))
 # Add to data
 test <- test %>%
   mutate(pred_improvement = preds,
-         residual = improvement - pred_improvement,
-         pos = case_when(player_positions == "GK" ~ "GK",
-                         str_detect(player_positions, "M") ~ "MID",
-                         str_detect(player_positions, "B") ~ "DEF",
-                         TRUE ~ "FWD")) %>%
+         residual = improvement - pred_improvement) %>%
   select(1:improvement, pred_improvement, residual, everything())
 
 # Metrics
