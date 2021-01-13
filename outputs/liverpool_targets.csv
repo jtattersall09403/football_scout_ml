@@ -1,0 +1,101 @@
+"short_name","age","value_eur","club","pos","player_positions","potential","overall","overall_pred_transfer","pred_improvement","pred_transfer_improvement"
+"K. De Bruyne",28,90,"Manchester City","ATT_MID","CAM",91,91,91.75,-0.2,0.75
+"C. Eriksen",27,68,"Tottenham Hotspur","ATT_MID","CAM",89,88,89.72,-0.04,1.72
+"P. Dybala",25,76.5,"Juventus","ATT_MID","CAM",92,88,89.01,0.73,1.01
+"M. Reus",30,56,"Borussia Dortmund","ATT_MID","CAM",88,88,88.15,0.01,0.15
+"Bruno Fernandes",24,49,"Sporting CP","ATT_MID","CAM",88,85,86.59,0.71,1.59
+"Isco",27,51,"Real Madrid","ATT_MID","CAM",87,86,86.03,-0.19,0.03
+"J. Rodríguez",27,40.5,"Real Madrid","ATT_MID","CAM",85,85,85.68,-0.21,0.68
+"N. Fekir",25,39,"Real Betis","ATT_MID","CAM",87,84,85.37,0.77,1.37
+"D. Alli",23,41.5,"Tottenham Hotspur","ATT_MID","CAM",89,84,85.14,0.68,1.14
+"M. Özil",30,29.5,"Arsenal","ATT_MID","CAM",84,84,84.86,-0.08,0.86
+"Oscar",27,29.5,"Shanghai SIPG FC","ATT_MID","CAM",84,83,84.33,0.91,1.33
+"D. Tadić",30,29.5,"Ajax","ATT_MID","CAM",84,84,84.14,-0.14,0.14
+"T. Lemar",23,34,"Atlético Madrid","WING","LM",87,83,83.84,0.58,0.84
+"N. Pépé",24,34.5,"Arsenal","WING","RM",88,83,83.66,0.41,0.66
+"Gonçalo Guedes",22,34.5,"Valencia CF","WING","LM",88,83,83.6,0.47,0.6
+"J. Draxler",25,32.5,"Paris Saint-Germain","ATT_MID","CAM",86,83,83.48,-0.14,0.48
+"F. Thauvin",26,30.5,"Olympique de Marseille","WING","RW",84,83,83.36,-0.06,0.36
+"Giuliano",29,21.5,"Al Nassr","ATT_MID","CAM",82,82,83.16,1.14,1.16
+"Pablo Sarabia",27,29.5,"Paris Saint-Germain","ATT_MID","CAM",84,83,83.09,-0.23,0.09
+"E. Forsberg",27,25.5,"RB Leipzig","ATT_MID","CAM",83,82,82.96,-0.26,0.96
+"Oyarzabal",22,31,"Real Sociedad","WING","LW",89,82,82.72,0.55,0.72
+"Muniain",26,26,"Athletic Club de Bilbao","ATT_MID","CAM",83,82,82.59,0.34,0.59
+"H. Aouar",21,26,"Olympique Lyonnais","MID","CM",89,81,82.44,1.25,1.44
+"A. Ljajić",27,20.5,"Beşiktaş JK","ATT_MID","CAM",82,81,82.4,-0.48,1.4
+"Gelson Martins",24,29,"AS Monaco","WING","RM",86,82,82.39,0.37,0.39
+"M. Sabitzer",25,22.5,"RB Leipzig","ATT_MID","CAM",84,81,82.38,0.27,1.38
+"L. Torreira",23,27,"Arsenal","MID","CDM",87,82,82.3,0.07,0.3
+"Suso",25,27,"Milan","WING","RW",84,82,82.27,0.19,0.27
+"D. van de Beek",22,24.5,"Ajax","ATT_MID","CAM",87,81,82.14,1.06,1.14
+"Taison",31,19.5,"Shakhtar Donetsk","ATT_MID","CAM",82,82,82.03,-0.49,0.03
+"T. Ndombele",22,26,"Tottenham Hotspur","MID","CM",89,81,81.85,0.24,0.85
+"W. Ndidi",22,20.5,"Leicester City","MID","CDM",84,81,81.85,0.74,0.85
+"P. Zieliński",25,22.5,"Napoli","MID","CM",85,81,81.77,0.48,0.77
+"D. Payet",32,14,"Olympique de Marseille","ATT_MID","CAM",81,81,81.58,-0.9,0.58
+"J. Corona",26,21,"FC Porto","WING","RM",82,81,81.49,0.47,0.49
+"Laure Santeiro",31,15.5,"Fluminense","ATT_MID","CAM",81,81,81.41,-0.18,0.41
+"Pozuelo",27,15.5,"Toronto FC","ATT_MID","CAM",80,80,81.38,0.41,1.38
+"R. Fraser",25,21.5,"Bournemouth","WING","LM",83,81,81.36,-0.03,0.36
+"N. Barella",22,21.5,"Inter","MID","CM",88,80,81.33,1.17,1.33
+"N. Gaitán",31,15.5,"Chicago Fire","ATT_MID","CAM",81,81,81.25,-0.64,0.25
+"João Mário",26,21.5,"Inter","ATT_MID","CAM",83,81,81.15,0.02,0.15
+"Bernard",26,16,"Everton","WING","LM",80,80,81.06,0.6,1.06
+"Pablo Fornals",23,24.5,"West Ham United","ATT_MID","CAM",87,81,81.04,-0.04,0.04
+"Gabriel",25,18,"SL Benfica","MID","CM",82,80,81.02,0.81,1.02
+"A. Christensen",23,19,"Chelsea","CB","CB",87,80,80.99,0.96,0.99
+"Carlos Soler",22,21,"Valencia CF","WING","RM",87,80,80.98,0.73,0.98
+"Lucas Paquetá",21,20.5,"Milan","ATT_MID","CAM",89,79,80.93,1.9,1.93
+"Y. Tielemans",22,20.5,"Leicester City","MID","CM",87,80,80.85,0.76,0.85
+"M. Eggestein",22,19.5,"SV Werder Bremen","MID","CM",85,80,80.85,-0.09,0.85
+"Rony Lopes",23,20,"Sevilla FC","WING","LM",85,80,80.78,0.26,0.78
+"André Gomes",25,17.5,"Everton","MID","CDM",84,80,80.7,0.43,0.7
+"I. Konaté",20,18,"RB Leipzig","CB","CB",88,79,80.64,0.98,1.64
+"H. Winks",23,20,"Tottenham Hotspur","MID","CM",86,80,80.64,0.63,0.64
+"Y. Belhanda",29,14.5,"Galatasaray SK","ATT_MID","CAM",80,80,80.63,-0.21,0.63
+"Sergi Darder",25,19,"RCD Espanyol","MID","CM",84,80,80.52,-0.22,0.52
+"M. Ødegaard",20,14.5,"Real Sociedad","WING","RW",85,78,80.5,1.8,2.5
+"Melendo",21,20.5,"RCD Espanyol","WING","RM",86,80,80.49,0.08,0.49
+"V. Rongier",24,19,"FC Nantes","MID","CM",84,80,80.48,0.26,0.48
+"M. Lazzari",25,18.5,"Lazio","WING","RM",83,80,80.48,0.13,0.48
+"S. Berge",21,17,"KRC Genk","MID","CDM",87,79,80.38,0.95,1.38
+"J. Ikoné",21,15.5,"LOSC Lille","ATT_MID","CAM",86,78,80.34,1.55,2.34
+"F. Chiesa",21,18.5,"Fiorentina","WING","RW",87,79,80.26,1.05,1.26
+"Dani Olmo",21,18.5,"Dinamo Zagreb","ATT_MID","CAM",87,79,80.26,1.1,1.26
+"Denis Suárez",25,13,"RC Celta","MID","CM",82,78,80.23,1.42,2.23
+"Manu Trigueros",27,16.5,"Villarreal CF","MID","CM",81,80,80.21,-0.2,0.21
+"Campaña",26,18,"Levante UD","MID","CM",83,80,80.17,-0.22,0.17
+"J. Maddison",22,17,"Leicester City","ATT_MID","CAM",84,79,80.14,0.74,1.14
+"J. Quintero",26,18.5,"River Plate","ATT_MID","CAM",83,80,80.11,-0.75,0.11
+"L. Pellegrini",23,18.5,"Roma","MID","CM",87,79,80.1,0.66,1.1
+"L. Trossard",24,16.5,"Brighton & Hove Albion","WING","LW",83,79,80.09,0.16,1.09
+"Raphinha",22,17,"Sporting CP","WING","RW",84,79,80.08,0.91,1.08
+"Bruma",24,13,"PSV","WING","LW",80,78,80.07,1.41,2.07
+"D. Klaassen",26,17,"SV Werder Bremen","MID","CM",81,80,80.05,-0.94,0.05
+"T. Souček",24,15.5,"SK Slavia Praha","MID","CDM",85,79,80.04,0.56,1.04
+"F. Grillitsch",23,16,"TSG 1899 Hoffenheim","MID","CM",83,79,80.04,1.02,1.04
+"A. Golovin",23,17.5,"AS Monaco","ATT_MID","CAM",85,79,79.98,0.66,0.98
+"N. Maksimović",24,14,"Getafe CF","MID","CM",84,78,79.94,1.33,1.94
+"J. Gbamin",23,15.5,"Everton","MID","CDM",84,79,79.91,0.81,0.91
+"D. Zakaria",22,15,"Borussia Mönchengladbach","MID","CM",86,78,79.85,1.25,1.85
+"Marc Roca",22,16,"RCD Espanyol","MID","CDM",86,79,79.85,0.21,0.85
+"Ferro",22,14.5,"SL Benfica","CB","CB",87,78,79.84,1.68,1.84
+"J. Vestergaard",26,11,"Southampton","CB","CB",79,78,79.83,-0.3,1.83
+"C. Ünder",21,15.5,"Roma","WING","RW",86,78,79.81,1.74,1.81
+"H. Onyekuru",22,15.5,"AS Monaco","WING","LM",86,78,79.8,1.02,1.8
+"Merino",23,18.5,"Real Sociedad","MID","CM",87,79,79.8,0.43,0.8
+"E. Bardhi",23,14,"Levante UD","MID","CM",84,78,79.79,0.95,1.79
+"J. Brooks",26,14,"VfL Wolfsburg","CB","CB",82,79,79.76,0.47,0.76
+"Bruno Viana",24,12,"SC Braga","CB","CB",82,78,79.74,1.49,1.74
+"Calero",23,13,"RCD Espanyol","CB","CB",84,78,79.7,0.19,1.7
+"J. Bamba",23,14.5,"LOSC Lille","WING","LM",85,78,79.69,0.52,1.69
+"M. Rashica",23,17.5,"SV Werder Bremen","WING","LW",85,79,79.69,0.44,0.69
+"M. Sanson",24,16,"Olympique de Marseille","MID","CM",83,79,79.68,0.42,0.68
+"L. Dunk",27,11,"Brighton & Hove Albion","CB","CB",80,78,79.67,0.22,1.67
+"R. Zobnin",25,16,"Spartak Moscow","MID","CDM",86,79,79.66,0.45,0.66
+"N. Nández",23,12.5,"Cagliari","MID","CM",84,77,79.65,1.06,2.65
+"Brais Méndez",22,13.5,"RC Celta","WING","RM",86,77,79.63,1.52,2.63
+"Ricardo Horta",24,16,"SC Braga","WING","LW",82,79,79.63,0.37,0.63
+"D. Berardi",24,13,"Sassuolo","WING","RW",81,78,79.61,0.28,1.61
+"N. Stark",24,15,"Hertha BSC","CB","CB",84,79,79.61,0.22,0.61
+"F. Neuhaus",22,15.5,"Borussia Mönchengladbach","MID","CM",87,78,79.58,0.88,1.58

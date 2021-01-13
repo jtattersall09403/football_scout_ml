@@ -1,0 +1,10 @@
+"season","short_name","last_club","club","age","player_positions","potential","overall","overall_next","improvement","pred_improvement","improvement > 0"
+18,"M. Salah","Roma","Liverpool",25,"RW",86,83,88,5,0.514204502105713,TRUE
+16,"A. Sørloth","Rosenborg BK","FK Bodø/Glimt",19,"ST",74,63,67,4,1.87148427963257,TRUE
+15,"A. Touré",NA,"FC Nantes",20,"CDM",70,60,64,4,4.75083541870117,TRUE
+18,"J. Brandt","Bayer 04 Leverkusen","Bayer 04 Leverkusen",21,"LM",88,80,82,2,0.842018127441406,TRUE
+17,"A. Al Dohaim","Hajer","Al Ittihad",22,"CB",71,61,62,1,2.38937187194824,TRUE
+16,"W. Bony","Swansea City","Manchester City",26,"ST",84,81,81,0,-0.433432817459106,FALSE
+17,"M. Niang","Milan","Milan",21,"ST",85,78,78,0,2.41520619392395,FALSE
+17,"A. Schürrle","VfL Wolfsburg","Borussia Dortmund",25,"LM",83,81,80,-1,-0.357594549655914,FALSE
+18,"G. Clichy","Manchester City","Medipol Başakşehir FK",31,"LB",77,77,76,-1,-1.19759178161621,FALSE

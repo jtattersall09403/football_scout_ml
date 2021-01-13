@@ -10,6 +10,8 @@ library(caret)
 library(ranger)
 library(plotly)
 library(fmsb)
+library(ggplot2)
+library(viridis)
 
 # ---- Load data ----
 
@@ -132,7 +134,51 @@ saveRDS(all_train_df, 'data/all_train_df.rds')
 saveRDS(inference_df, 'data/inference_df.rds')
 
 # ---- EDA ----
-# TODO
+
+# Reload data
+all_train_df <- readRDS('data/all_train_df.rds')
+inference_df <- readRDS('data/inference_df.rds')
+
+# Distribution of improvement
+all_train_df %>%
+  ggplot(aes(x=improvement)) +
+  geom_histogram(fill = "grey60", colour = "grey40") +
+  geom_vline(xintercept = mean(all_train_df$improvement, na.rm = TRUE),
+             linetype = "dashed") +
+  annotate("text",
+           x = mean(all_train_df$improvement, na.rm = TRUE) + 2,
+           y = 5000,
+           label = paste("Average:", round(mean(all_train_df$improvement, na.rm = TRUE), 2))) +
+  labs(title = "Target variable distribution")
+  
+
+# Biggest winners and losers
+all_train_df %>%
+  group_by(improvement > 0) %>%
+  arrange(desc(abs(improvement))) %>%
+  filter(row_number() <= 5) %>%
+  ungroup %>%
+  mutate(label = paste0(short_name, " (", club, ")"),
+         bar_fill = improvement > 0) %>%
+  select(season, short_name, club, label, age, bar_fill, improvement, overall, overall_next, pos) %>%
+  ggplot(aes(x=reorder(label, improvement), y=improvement, fill = bar_fill, label = label)) +
+  geom_col(show.legend = FALSE) +
+  coord_flip() +
+  scale_fill_manual(values = c("#e03531", "#51b364")) +
+  theme_minimal() +
+  labs(x = "", title = "Biggest year-on-year changes")
+
+# Improvement by position and age
+all_train_df %>%
+  group_by(pos) %>%
+  sample_n(500) %>%
+  ggplot(aes(x=age, y=improvement, colour = pos)) +
+  geom_jitter(alpha = 0.5) +
+  facet_wrap(~pos, ncol = 3) +
+  scale_colour_viridis(discrete = TRUE) +
+  geom_smooth(method = "lm", colour = "grey40", se = FALSE) +
+  labs(title = "Improvement by age and position")
+
 
 # Create spider graph plotting function
 spider_plot <- function(inference_df, selected_club) {
@@ -164,7 +210,7 @@ spider_plot <- function(inference_df, selected_club) {
 
 # Case study of a club
 spider_plot(inference_df, "Liverpool")
-spider_plot(inference_df, "Manchester United")
+spider_plot(inference_df, "Chelsea")
 spider_plot(inference_df, "AFC Wimbledon")
 
 # Which players improved the most over the course of a season?

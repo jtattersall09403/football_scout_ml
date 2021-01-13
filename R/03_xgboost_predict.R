@@ -27,6 +27,21 @@ test <- all_train_df %>% filter(season > 18) %>% bind_rows(inference_df)
 # Load model
 xgb_model <- xgb.load('models/xgb.model')
 
+# Convert test to xgb object
+transfers_xgb <- test %>%
+  select(names(train)) %>%
+  select(-improvement) %>%
+  as.matrix() %>%
+  xgb.DMatrix()
+
+# Create predictions
+preds <- predict(xgb_model, transfers_xgb)
+
+# Add to data
+test <- test %>%
+  mutate(pred_improvement = preds) %>%
+  select(1:improvement, pred_improvement, everything())
+
 # ---- New predictions ----
 
 # Get predictions for who will improve from 2020 to 2021
@@ -69,7 +84,7 @@ saveWidget(fig, "predicted_improvement.html", selfcontained = F, libdir = "lib")
 # ---- Transfers ----
 
 # Function to get best transfer targets
-get_best_transfers <- function(selected_club, min_rating, max_val = Inf, train, test, xgb_model) {
+get_best_transfers <- function(selected_club, min_rating, max_val = Inf, train, test, xgb_model, type = "best") {
   
   # Get club attributes
   club_attrs <- test %>%
@@ -108,7 +123,7 @@ get_best_transfers <- function(selected_club, min_rating, max_val = Inf, train, 
     pivot_wider(id_cols = "pos", names_from = "player_rank", values_from = "overall")
   
   # Get player attributes, mutate club attributes equal to those of the selected club,
-  # create xgbo object, predict. compare with original predictions
+  # create xgb object, predict. Compare with original predictions
   transfer_attrs <- test %>%
     filter(season == max(season)) %>%
     mutate(club = selected_club) %>%
@@ -138,24 +153,53 @@ get_best_transfers <- function(selected_club, min_rating, max_val = Inf, train, 
   # Create final data for comparison
   transfers_final <- test %>%
     filter(season == max(season)) %>%
-    mutate(pred_transfer_improvement = transfer_preds) %>%
-    select(1:pred_improvement, pred_transfer_improvement, everything())
-  
-  # Find players who would do better in this club than if they remained where they are
-  best_transfers <- transfers_final %>%
-    mutate(overall_pred_transfer = pred_transfer_improvement + overall,
+    mutate(pred_transfer_improvement = transfer_preds,
+           overall_pred_transfer = pred_transfer_improvement + overall,
            value_eur = value_eur/1e6) %>%
-    filter(pred_transfer_improvement > pred_improvement,
-           overall_pred_transfer > min_rating,
-           value_eur <= max_val) %>%
-    select(short_name, age, value_eur, club, pos, potential, overall, overall_pred_transfer, pred_improvement, pred_transfer_improvement) %>%
-    arrange(desc(pred_transfer_improvement))
+    filter(club != selected_club) %>%
+    mutate_at(vars(pred_improvement, overall_pred_transfer, pred_transfer_improvement), round, digits = 2)
+  
+  # Either get players to sign or avoid
+  if (type == "best") {
+    
+    # Find players who would do better in this club than if they remained where they are
+    best_transfers <- transfers_final %>%
+      filter(pred_transfer_improvement > pred_improvement,
+             overall_pred_transfer > min_rating,
+             value_eur <= max_val) %>%
+      select(short_name, age, value_eur, club, pos, player_positions, potential, overall, overall_pred_transfer, pred_improvement, pred_transfer_improvement) %>%
+      arrange(desc(pred_transfer_improvement))
+    
+  } else if (type == "worst") {
+    
+    # Find players who would do worse in this club than if they remained where they are
+    best_transfers <- transfers_final %>%
+      filter(pred_transfer_improvement < pred_improvement,
+             value_eur <= max_val) %>%
+      select(short_name, age, value_eur, club, pos, player_positions, potential, overall, overall_pred_transfer, pred_improvement, pred_transfer_improvement) %>%
+      arrange(pred_transfer_improvement)
+    
+  }
+
   
 }
 
 # Have a look!
-best_transfers <- get_best_transfers(selected_club = "Leeds United", min_rating = 60, max_val = 15, train, test, xgb_model)
-best_transfers %>% arrange(desc(overall_pred_transfer)) %>% filter(pred_transfer_improvement > 0) %>% View
+best_transfers <- get_best_transfers(selected_club = "Liverpool", min_rating = 78, max_val = 90, train, test, xgb_model) %>%
+  arrange(desc(overall_pred_transfer)) %>% 
+  filter(pred_transfer_improvement > 0) %>%
+  slice(1:100)
+
+# Save
+write.csv(best_transfers, file = "outputs/liverpool_targets.csv", row.names = FALSE)
+
+# Ones to avoid
+worst_transfers <- get_best_transfers(selected_club = "Liverpool", min_rating = 80, max_val = 90, train, test, xgb_model, type = "worst")
+
+# Ones to avoid, who might otherwise look good
+worst_transfers %>%
+  filter(overall > 80,
+         age < 30)
 
 # With some filters
 best_transfers %>%
@@ -166,3 +210,86 @@ best_transfers %>%
   filter(pos == "WING",
          pred_transfer_improvement > 0)
 
+# ---- All premier league ----
+
+prem_clubs <- c("Liverpool", "Manchester City", "Chelsea", "Leicester City", "Manchester United",
+                "Wolverhampton Wanderers", "Arsenal", "Tottenham Hotspur", "Sheffield United",
+                "Burnley", "Everton", "Crystal Palace", "Newcastle United", "Watford", "West Ham United",
+                "Southampton", "Aston Villa", "Brighton & Hove Albion", "Bournemouth", "Norwich City")
+
+# Get transfer targets for all
+all_targets <- lapply(prem_clubs, function(club_name) {
+  
+  # Progress
+  message(club_name)
+  
+  # Get value of current most expensive player
+  maxval <- 1.2 * max(test$value_eur[test$club == club_name], na.rm = TRUE)/1e6
+  
+  # Get rating of current worst first team player and take a couple off
+  minrating <- min(test$overall[test$club == club_name & test$first_11==TRUE], na.rm = TRUE) - 2
+  
+  # Get targets
+  get_best_transfers(selected_club = club_name, min_rating = minrating, max_val = maxval, train, test, xgb_model) %>%
+    arrange(desc(overall_pred_transfer)) %>% 
+    filter(pred_transfer_improvement > 0) %>%
+    slice(1:50) %>%
+    mutate(new_club = club_name) %>%
+    select(new_club, everything())
+  
+})
+
+# Bind rows and save
+all_targets %>%
+  bind_rows %>%
+  write.csv('outputs/all_transfer_targets.csv')
+
+# ---- Case studies ----
+
+# Load cross validation results
+xgb_cv_res <- readRDS('models/xgb_cv_results.rds')
+
+# CV predictions
+cv_df  <- all_train_df %>% filter(season <= 18) %>% 
+  mutate(pred_improvement = xgb_cv_res$pred) %>%
+  select(1:improvement, pred_improvement, everything())
+
+# Find players who:
+# - Changed clubs
+# - looked like they would be good
+# - but turned out not to be
+# - and were correctly predicted
+bad_examples <- cv_df %>%
+  group_by(sofifa_id) %>%
+  arrange(season) %>%
+  mutate(last_club = lag(club)) %>%
+  filter(club != lag(club)) %>%
+  filter(age < 27,
+         improvement < 0,
+         pred_improvement < 0,
+         potential > overall) %>%
+  ungroup %>%
+  select(season, short_name, last_club, club, age, player_positions, overall, potential, improvement, pred_improvement) %>%
+  arrange(desc(overall))
+
+# Compare with players who:
+# - Changed clubs
+# - looked like they would be good
+# - And did improve
+# - and were correctly predicted
+good_expamples <- cv_df %>%
+  group_by(sofifa_id) %>%
+  arrange(season) %>%
+  mutate(last_club = lag(club)) %>%
+  filter(club != lag(club)) %>%
+  filter(age < 27,
+         improvement > 0,
+         pred_improvement > 0,
+         potential > overall) %>%
+  ungroup %>%
+  select(season, short_name, last_club, club, age, player_positions, overall, potential, improvement, pred_improvement) %>%
+  arrange(desc(overall))
+
+# Compare
+View(good_expamples)
+View(bad_examples)

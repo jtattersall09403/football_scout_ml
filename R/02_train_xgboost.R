@@ -108,6 +108,7 @@ xgb_model <- xgb.train(
 )
 
 # Save
+saveRDS(xgb_cv_res, 'models/xgb_cv_results.rds')
 xgb.save(xgb_model, 'models/xgb.model')
 
 # ---- CV evaluation ----
@@ -144,6 +145,24 @@ cv_df <- all_train_df %>%
   filter(season <= 18) %>%
   mutate(pred_improvement = xgb_cv_res$pred) %>%
   select(1:improvement, pred_improvement, everything())
+
+# Create a csv file with some examples
+examples <- cv_df %>%
+  group_by(sofifa_id) %>%
+  arrange(season) %>%
+  mutate(last_club = lag(club)) %>%
+  ungroup %>%
+  select(season, short_name, last_club, club, age, player_positions, potential, overall, overall_next, improvement, pred_improvement) %>%
+  arrange(desc(overall)) %>%
+  group_by(improvement > 0) %>%
+  filter((short_name == "A. SchÃ¼rrle" & season == 17) |
+         (short_name == "M. Salah" & season == 18) |
+           row_number() %in% sample(1:nrow(.), 9)) %>%
+  ungroup %>%
+  arrange(desc(improvement))
+
+# Save
+write.csv(examples, 'data/example_cv_predictions.csv', row.names = FALSE)
 
 # Are the top improvers predicted to get better?
 cv_df %>% select(season, short_name, age, pos, overall, overall_next, improvement, pred_improvement) %>% arrange(desc(improvement))
